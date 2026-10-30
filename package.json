@@ -1,0 +1,62 @@
+{
+  "name": "satarkai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postinstall": "prisma generate",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:seed": "tsx -r dotenv/config prisma/seed.ts dotenv_config_path=.env",
+    "db:reset": "prisma db push --force-reset && npm run db:seed",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check:baseline": "tsx -r dotenv/config scripts/check-baseline.ts dotenv_config_path=.env",
+    "detect": "tsx -r dotenv/config scripts/run-detectors.ts dotenv_config_path=.env",
+    "eval": "tsx -r dotenv/config scripts/eval-detectors.ts dotenv_config_path=.env",
+    "detect:ml": "ML_MODE=ml tsx -r dotenv/config scripts/run-detectors.ts dotenv_config_path=.env",
+    "ml:serve": "ml/.venv/bin/uvicorn app.main:app --app-dir ml --host 127.0.0.1 --port 8000",
+    "ml:setup": "uv venv ml/.venv --python $(which python3.13) && uv pip install --python ml/.venv/bin/python -r ml/requirements.txt",
+    "ml:test": "ml/.venv/bin/python -m pytest ml/tests -q",
+    "tune": "tsx -r dotenv/config scripts/tune-thresholds.ts dotenv_config_path=.env",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@prisma/client": "^5.22.0",
+    "@tanstack/react-query": "^5.103.1",
+    "bcryptjs": "^3.0.3",
+    "clsx": "^2.1.1",
+    "jose": "^6.2.12",
+    "next": "14.2.15",
+    "pdfkit": "^0.20.2",
+    "prisma": "^5.22.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "recharts": "^3.10.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^20",
+    "@types/pdfkit": "^0.17.6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "axe-core": "^4.13.0",
+    "dotenv": "^18.0.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.15",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}
